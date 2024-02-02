@@ -85,7 +85,21 @@ def create_grille(n, m, nbgold):
         (l,c)=L[mechant]
         abs=randint(0,l-1)
         ord=randint(0,c-1)
-        I[i+abs][l+ord]="m"
+        I[i+abs][j+ord]="m"
+    for k in range(nbgold):
+        place=randint(0,donjon-1)
+        (i,j)=M[place]
+        (l,c)=L[place]
+        abs=randint(1,l-1)
+        ord=randint(1,c-1)
+        while I[i+abs][j+ord]=="m":
+            place=randint(0,donjon-1)
+            (i,j)=M[place]
+            (l,c)=L[place]
+            abs=randint(1,l-1)
+            ord=randint(1,c-1)
+        I[i+abs][j+ord]="g"
+
         
 
     return I
