@@ -8,7 +8,7 @@ class Character:
         self.stdscr = stdscr
         self.run = True
 
-    def move(self, dungeon_map):
+    def move(self, dungeon_map, enemy):
         key = self.stdscr.getch()
         new_x, new_y = self.x, self.y
 
@@ -23,7 +23,7 @@ class Character:
         elif key == ord('s') and self.x > 1:
             new_x -= 1
 
-        if dungeon_map[new_y][new_x] in '.,+,=,#':
+        if dungeon_map[new_y][new_x] in '.,+,=,#' and (new_x, new_y) != (enemy.x , enemy.y):
             self.x, self.y = new_x, new_y
 
 class Enemy:
@@ -64,7 +64,7 @@ def main(stdscr):
     dungeon = Dungeon(stdscr)
     while dungeon.player.run:
         dungeon.display()
-        dungeon.player.move(dungeon.map)
+        dungeon.player.move(dungeon.map, dungeon.enemy)
         dungeon.enemy.move(dungeon.map)
 
 if __name__ == "__main__":
