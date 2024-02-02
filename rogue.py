@@ -54,12 +54,14 @@ class Enemy:
                 new_x=self.x+int(X/(np.abs(X)))
                 if dungeon_map[self.y][new_x] in '.,+,=,#' and (new_x, self.y) != (player.x, player.y):
                     self.x=new_x
+                else : self.y=self.y+int(Y/(np.abs(Y)))
             else :
                 new_y=self.y+int(Y/(np.abs(Y)))
                 if dungeon_map[new_y][self.x] in '.,+,=,#' and (self.x, new_y) != (player.x, player.y):
                     self.y=new_y
+                else : self.x=self.x+int(X/(np.abs(X)))
         #else :
-                #get to the nearest door
+                #get to the nearest door (code not done yet)
             
     def move(self, dungeon_map, player):
         # Move towards the player's position
@@ -236,15 +238,13 @@ def create_grille(n,):
 n = 50
 
 resulting_grille = create_grille(n)
-for row in resulting_grille:  
-     print(row)
+#for row in resulting_grille:  
+#     print(row)
 
-
+"""fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. 
+On parcourt chaque case de la matrice pour voir ce qui s'y trouve"""
 def matrice(carte):
-     """fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. 
-     On parcourt chaque case de la matrice pour voir ce qui s'y trouve"""
     carte_terminal=[]
-
     for y in range(len(carte)):
         ligne=""
         for x in range(len(carte[0])):
