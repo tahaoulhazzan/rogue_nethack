@@ -1,8 +1,10 @@
 from random import randint
 
-def create_grille(n, m, nbgold):
+def create_grille(n,):
     grille = [[0 for _ in range(n)] for _ in range(n)]
-    donjon = randint(3, 5)
+    donjon = randint(3, 6)
+    E=[]
+    X=[[] for _ in range(donjon)]
 
     # La taille de la grille vaut n^2 et on a entre 3 et 5 donjons
     # On décide que la surface avec celles des donjons doit être égale à la moitié de la surface totale
@@ -26,6 +28,7 @@ def create_grille(n, m, nbgold):
             c = randint(4, 10)
             L.append((l, c))
             surface += l * c
+   
 
     # On veut générer aléatoirement la position en haut à droite des grilles
     I = [[0 for _ in range(n)] for _ in range(n)]
@@ -64,45 +67,47 @@ def create_grille(n, m, nbgold):
                 (prev_x, prev_y) = M[j - 1]
                 path_start = (prev_x + L[j - 1][0] // 2, prev_y + L[j - 1][1] - 1)
                 I[path_start[0]][path_start[1]] = 4
-
+                X[j-1].append(path_start)
+                
                 path_end = (x + l // 2, y)
                 I[path_end[0]][path_end[1]] = 4
-
+                X[j].append(path_end)
                 for p in range(path_start[0], path_end[0] + 1):
                      I[p][path_start[1]] = 5
 
                 for q in range(path_start[1], path_end[1] + 1):
                      I[path_end[0]][q] = 5
-
+    for j in range(donjon):
+         E.append([M[j],L[j],X[j]])
 
     perso=randint(1,donjon)
     (i,j)=M[perso-1]
     (l,c)=L[perso-1]
     I[i+l//2][j+c//2]="@"
-    for k in range(m):
-        mechant=randint(0,donjon-1)
-        (i,j)=M[mechant]
-        (l,c)=L[mechant]
-        abs=randint(0,l-1)
-        ord=randint(0,c-1)
-        I[i+abs][j+ord]="m"
-    for k in range(nbgold):
-        place=randint(0,donjon-1)
-        (i,j)=M[place]
-        (l,c)=L[place]
-        abs=randint(1,l-1)
-        ord=randint(1,c-1)
-        while I[i+abs][j+ord]=="m":
-            place=randint(0,donjon-1)
-            (i,j)=M[place]
-            (l,c)=L[place]
-            abs=randint(1,l-1)
-            ord=randint(1,c-1)
-        I[i+abs][j+ord]="g"
+   ## for k in range(m):
+   ##     mechant=randint(0,donjon-1)
+   ##     (i,j)=M[mechant]
+   ##     (l,c)=L[mechant]
+   ##     abs=randint(0,l-1)
+   ##     ord=randint(0,c-1)
+   ##     I[i+abs][j+ord]="m"
+   ##    for k in range(nbgold):
+   ##     place=randint(0,donjon-1)
+   ##     (i,j)=M[place]
+   ##     (l,c)=L[place]
+   ##     abs=randint(1,l-1)
+   ##     ord=randint(1,c-1)
+   ##     while I[i+abs][j+ord]=="m":
+   ##         place=randint(0,donjon-1)
+   ##         (i,j)=M[place]
+   ##         (l,c)=L[place]
+   ##         abs=randint(1,l-1)
+   ##         ord=randint(1,c-1)
+   ##     I[i+abs][j+ord]="g"
 
         
 
-    return I
+    return donjon,I,E
 
           
 
@@ -111,9 +116,8 @@ def create_grille(n, m, nbgold):
 
 # Example usage:
 n = 50
-nbméchants = 3
-nbgold = 2
-resulting_grille = create_grille(n, nbméchants, nbgold)
+
+resulting_grille = create_grille(n)
 for row in resulting_grille:  
      print(row)
      
