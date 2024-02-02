@@ -237,7 +237,7 @@ for row in resulting_grille:
 
 
 def matrice(carte):
-     """fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. On parcours chaque
+     """fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. On parcourt chaque case de la matrice pour voir ce qui s'y trouve"""
     carte_terminal=[]
 
     for y in range(len(carte)):
