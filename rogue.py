@@ -82,7 +82,7 @@ class Dungeon:
             "          _________         "
         ]
         self.player = Character(stdscr)
-        self.enemy = Enemy(stdscr, 5, 3)  # Example enemy starting position
+        self.enemy = Enemy(stdscr, 5, 3)  # Exemple position de départ de l'ennemi
         self.last_enemy_move_time = time.time()
 
     def display(self):
