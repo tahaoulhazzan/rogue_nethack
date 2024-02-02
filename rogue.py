@@ -113,11 +113,15 @@ def main(stdscr):
 if __name__ == "__main__":
     curses.wrapper(main)
 
-    from random import randint
 
 from random import randint
 
 def create_grille(n,):
+    """Pour la fonction qui génére la grille, on renvoie une matrice (liste de liste ici) qui modélise la grille ainsi qu'une liste qui donne des renseignements sur chacun des donjons générés aléatoirement(leur position, leur taille et la position de leurs portes). 
+    Le nombre de donjons est généré aléatoirement entree 3 et 6 et leur taille est aussi prise aléatoirement mais il faut que la surface totale des donjons soit inférieur à une surface référence. 
+    De plus on génère aléatoirement la position en haut à gauche de chacun des donjons jusqu'à que les donjons n'ont pas des parties communes. 
+    Ensuite, on crée des portes et on relie 2 à 2 des portes."""
+    
     grille = [[0 for _ in range(n)] for _ in range(n)]
     donjon = randint(3, 6)
     E=[]
@@ -237,7 +241,8 @@ for row in resulting_grille:
 
 
 def matrice(carte):
-     """fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. On parcourt chaque case de la matrice pour voir ce qui s'y trouve"""
+     """fonction qui transforme la matrice représentant la carte du jeu qui a été générée aléatoirement en une liste de chaines de caractères qui peut être utilisé par la bibliothèque curses. 
+     On parcourt chaque case de la matrice pour voir ce qui s'y trouve"""
     carte_terminal=[]
 
     for y in range(len(carte)):
